@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestWordle\**" />
+    <EmbeddedResource Remove="TestWordle\**" />
+    <None Remove="TestWordle\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="DataDefinitions.cs" />
+    <Compile Remove="Old Program.cs" />
+    <Compile Remove="Program - Copy.cs" />
+    <Compile Remove="Program - to test 2 levels deep.cs" />
+    <Compile Remove="Program2 - Copy.cs" />
+    <Compile Remove="WordleFunctions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include ="Tests"/>
+  </ItemGroup>
+
+</Project>
