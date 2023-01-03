@@ -1,4 +1,5 @@
-# WordleSolver - An automated solver for Wordle Puzzles that never takes > 5 attempts, and with average of 3.55
+# WordleSolver
+## An automated solver for Wordle Puzzles that never takes > 5 attempts, and with average of 3.55
 
 To run this as-is, you will need Visual Studio, with .NET 6.0 (or later) and C# 9 (or later) already installed. You may either replicate the repository, or download a .zip of the code and unzip it on your local system. Then just open the Wordle_Solver.csproj file with Visual Studio and Run the project to see the console.
 
