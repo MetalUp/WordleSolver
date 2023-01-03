@@ -9,7 +9,8 @@ while (outcome != "*****")
     possible = PossibleAnswersAfterAttempt(possible, attempt, outcome);
 }
 
-//Alternative program to analyse performance, tested over all 2,309 possible answer words
+//Alternative program to analyse performance
+
 //var dict = new Dictionary<int, int>();
 //foreach (var target in AllPossibleAnswers)
 //{
