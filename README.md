@@ -11,12 +11,15 @@ _ (underscore) for a non-match (equivalent to a ‘grey’ in the online puzzle)
 and then hit Return/Enter after entering five symbols. The solver will respond with its next attempt word. This process continues until the answer is identified – entering ***** will then just exit the program. 
 
 Running the C# version
+
 To run this as-is, you will need Visual Studio, with .NET 6.0 (or later) and C# 9 (or later) already installed. Then just open the Wordle_Solver.csproj file with Visual Studio and Run the project to see the console.
 
 Running the VB.NET version
+
 To run this as-is, you will need Visual Studio, with .NET 6.0 (or later) hen just open the Wordle_Solver.vbproj file with Visual Studio and Run the project to see the console.
 
 Running the Python version
+
 The code is set up to run as a Visual Studio project, though you will need to have set up Visual Studio to run Python projects. Alternatively you can simply copy the program.py file from the repository and run it within your own preferred Python IDE. Please note, the Python version runs significantly slower than the other two - frustratingly slow. So the console program has been modified in two ways:
 
 1. The first attempt word is  'hard-wired' RAISE (which the solver would always come up with anyway)
