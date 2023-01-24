@@ -2,49 +2,49 @@
 
 static bool IsGreen(string attempt, string target, int n) => target[n] == attempt[n];
 
- static string SetChar(string word, int n, char newChar) => word.Substring(0, n) + newChar + word.Substring(n + 1);
+static string SetChar(string word, int n, char newChar) => word.Substring(0, n) + newChar + word.Substring(n + 1);
 
- static string SetAttemptIfGreen(string attempt, string target, int n) =>
-        IsGreen(attempt, target, n) ? SetChar(attempt, n, '*') : attempt;
+static string SetAttemptIfGreen(string attempt, string target, int n) =>
+       IsGreen(attempt, target, n) ? SetChar(attempt, n, '*') : attempt;
 
- static string SetTargetIfGreen(string attempt, string target, int n) =>
-    IsGreen(attempt, target, n) ? SetChar(target, n, '.') : target;
+static string SetTargetIfGreen(string attempt, string target, int n) =>
+   IsGreen(attempt, target, n) ? SetChar(target, n, '.') : target;
 
- static (string attempt, string target) EvaluateGreens(string attempt, string target) =>
-    Range(0, 5).Aggregate((attempt, target), (a, n) =>
-        (SetAttemptIfGreen(a.attempt, a.target, n), SetTargetIfGreen(a.attempt, a.target, n)));
+static (string attempt, string target) EvaluateGreens(string attempt, string target) =>
+   Range(0, 5).Aggregate((attempt, target), (a, n) =>
+       (SetAttemptIfGreen(a.attempt, a.target, n), SetTargetIfGreen(a.attempt, a.target, n)));
 
- static bool IsYellow(string attempt, string target, int n) => target.Contains(attempt[n]);
+static bool IsYellow(string attempt, string target, int n) => target.Contains(attempt[n]);
 
- static bool IsAlreadyMarkedGreen(string attempt, int n) => attempt[n] == '*';
+static bool IsAlreadyMarkedGreen(string attempt, int n) => attempt[n] == '*';
 
- static string SetAttemptIfYellow(string attempt, string target, int n) =>
-    IsAlreadyMarkedGreen(attempt, n) ? attempt : IsYellow(attempt, target, n) ? SetChar(attempt, n, '+') : SetChar(attempt, n, '_');
+static string SetAttemptIfYellow(string attempt, string target, int n) =>
+   IsAlreadyMarkedGreen(attempt, n) ? attempt : IsYellow(attempt, target, n) ? SetChar(attempt, n, '+') : SetChar(attempt, n, '_');
 
- static string SetTargetIfYellow(string attempt, string target, int n) =>
-        IsAlreadyMarkedGreen(attempt, n) ? target : IsYellow(attempt, target, n) ? SetChar(target, target.IndexOf(attempt[n]), '.') : target;
+static string SetTargetIfYellow(string attempt, string target, int n) =>
+       IsAlreadyMarkedGreen(attempt, n) ? target : IsYellow(attempt, target, n) ? SetChar(target, target.IndexOf(attempt[n]), '.') : target;
 
- static (string attempt, string target) EvaluateYellows(string attempt, string target) =>
-    Range(0, 5).Aggregate((attempt, target), (a, n) =>
-        (SetAttemptIfYellow(a.attempt, a.target, n), SetTargetIfYellow(a.attempt, a.target, n)));
+static (string attempt, string target) EvaluateYellows(string attempt, string target) =>
+   Range(0, 5).Aggregate((attempt, target), (a, n) =>
+       (SetAttemptIfYellow(a.attempt, a.target, n), SetTargetIfYellow(a.attempt, a.target, n)));
 
- static string MarkAttempt(string attempt, string target) =>
-    EvaluateYellows(EvaluateGreens(attempt, target).attempt, EvaluateGreens(attempt, target).target).attempt;
+static string MarkAttempt(string attempt, string target) =>
+   EvaluateYellows(EvaluateGreens(attempt, target).attempt, EvaluateGreens(attempt, target).target).attempt;
 
- static IEnumerable<string> PossibleAnswersAfterAttempt(IEnumerable<string> prior, string attempt, string mark) =>
-    prior.Where(w => MarkAttempt(attempt, w) == mark).ToList();
+static IEnumerable<string> PossibleAnswersAfterAttempt(IEnumerable<string> prior, string attempt, string mark) =>
+   prior.Where(w => MarkAttempt(attempt, w) == mark);
 
- static int WordCountRemainingAfterAttempt(IEnumerable<string> possibleAnswers, string attempt) =>
-    possibleAnswers.GroupBy(w => MarkAttempt(attempt, w)).Max(g => g.Count());
+static int WordCountRemainingAfterAttempt(IEnumerable<string> possibleAnswers, string attempt) =>
+   possibleAnswers.GroupBy(w => MarkAttempt(attempt, w)).Max(g => g.Count());
 
- static IEnumerable<(string word, int count)> AllRemainingWordCounts(IEnumerable<string> possAnswers, IEnumerable<string> possAttempts) =>
-    possAttempts.AsParallel().Select(w => (w, WordCountRemainingAfterAttempt(possAnswers, w)));
+static IEnumerable<(string word, int count)> AllRemainingWordCounts(IEnumerable<string> possAnswers, IEnumerable<string> possAttempts) =>
+   possAttempts.AsParallel().Select(w => (w, WordCountRemainingAfterAttempt(possAnswers, w)));
 
- static (string word, int count) BetterOf((string word, int count) word1, (string word, int count) word2, IEnumerable<string> possAnswers) =>
-    (word2.count < word1.count) || (word2.count == word1.count && possAnswers.Contains(word2.word)) ? word2 : word1;
+static (string word, int count) BetterOf((string word, int count) word1, (string word, int count) word2, IEnumerable<string> possAnswers) =>
+   (word2.count < word1.count) || (word2.count == word1.count && possAnswers.Contains(word2.word)) ? word2 : word1;
 
- static string BestAttempt(IEnumerable<string> possAnswers, IEnumerable<string> possAttempts) =>
-    AllRemainingWordCounts(possAnswers, possAttempts).Aggregate((bestSoFar, next) => BetterOf(bestSoFar, next, possAnswers)).word;
+static string BestAttempt(IEnumerable<string> possAnswers, IEnumerable<string> possAttempts) =>
+   AllRemainingWordCounts(possAnswers, possAttempts).Aggregate((bestSoFar, next) => BetterOf(bestSoFar, next, possAnswers)).word;
 
 List<string> AllPossibleAnswers = new List<string>
         {

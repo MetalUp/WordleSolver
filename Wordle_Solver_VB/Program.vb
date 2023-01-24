@@ -55,8 +55,8 @@ Module Program
         Return EvaluateYellows(EvaluateGreens(attempt, target).Item1, EvaluateGreens(attempt, target).Item2).Item1
     End Function
 
-    Public Function PossibleAnswersAfterAttempt(prior As IEnumerable(Of String), attempt As String, mark As String) As List(Of String)
-        Return prior.Where(Function(w) MarkAttempt(attempt, w) = mark).ToList()
+    Public Function PossibleAnswersAfterAttempt(prior As IEnumerable(Of String), attempt As String, mark As String) As IEnumerable(Of String)
+        Return prior.Where(Function(w) MarkAttempt(attempt, w) = mark)
     End Function
 
     Public Function WordCountRemainingAfterAttempt(ByVal possibleAnswers As IEnumerable(Of String), attempt As String) As Integer
