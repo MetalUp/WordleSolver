@@ -4,9 +4,9 @@ The program will open a console window, and after a short delay the solver will 
 
 Back on the Wordle Solver screen, you must then enter these marks on the line underneath the attempt word  (the cursor will already be positioned there), character by character, using the symbols:
 
-* for an in-place match (equivalent to a ‘green’ on the online puzzle)
-+ for an out-of-place match (equivalent to a ‘yellow’ in the online puzzle)
-_ (underscore) for a non-match (equivalent to a ‘grey’ in the online puzzle)
+'*' for an in-place match (equivalent to a ‘green’ on the online puzzle)
+'+' for an out-of-place match (equivalent to a ‘yellow’ in the online puzzle)
+'_' (underscore) for a non-match (equivalent to a ‘grey’ in the online puzzle)
 
 and then hit Return/Enter after entering five symbols. The solver will respond with its next attempt word. This process continues until the answer is identified – entering ***** will then just exit the program. 
 
